@@ -1,12 +1,22 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 <!-- badges: start -->
 <!-- badges: end -->
 
 ## Introduction
 
-The goal of adcf is to calculate auto-distance covariance for univariate
-time series data.
+The goal of adcf is to calculate auto-distance covariance for univariate time series data.
 
 ## Installation
 
@@ -19,8 +29,7 @@ devtools::install_github("leonfernandes/adcf")
 
 ## Example
 
-This is a basic example which shows you how to calculate auto distance
-covariance.
+This is a basic example which shows you how to calculate auto distance covariance.
 
 ``` r
 library(adcf)
