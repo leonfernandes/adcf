@@ -1,5 +1,5 @@
 Package: adcf
-Title: Auto distance covariance/correlation.
+Title: Auto distance covariance/correlation
 Version: 0.0.0.9000
 Authors@R: 
     person(
@@ -17,7 +17,13 @@ Imports:
     dcov,
     Rcpp,
     RcppArmadillo,
-    vctrs
+    vctrs,
+    stats,
+    tibble,
+    purrr
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
