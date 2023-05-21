@@ -1,5 +1,5 @@
 #' Calculates the auto-distance covariance of `x`. The weight measure for the
-#' distance covriance is specified via the Fourier transform function `mu_hat`.
+#' distance covariance is specified via the Fourier transform function `mu_hat`.
 #'
 #' @param x numeric vector.
 #' @param lag integer. Specifies lag(s) at which distance covariance is to be

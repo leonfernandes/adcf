@@ -11,7 +11,7 @@ mu_hat_szekely <- function(x, index = 1) {
 }
 #'
 #' @rdname fourier_transforms
-#' @param sigma2 Variance of guassian measure.
+#' @param sigma2 Variance of gaussian measure.
 #' @returns numeric matrix of Fourier transformed version of `x` according to
 #' Gaussian weight measure.
 mu_hat_gaussian <- function(x, sigma2 = 0.25) {

@@ -4,22 +4,24 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of adcf is to to calculate auto-distance covariance for univariate time series data.
+The goal of adcf is to calculate auto-distance covariance for univariate time series data.
 
 ## Installation
 
 You can install the development version of adcf like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# Install development version from github
+devtools::install_github("leonfernandes/adcf")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to calculate auto distance covariance.
 
 ``` r
 library(adcf)
-## basic example code
+# Simulate a univariate autoregressive time series
+x <- stats::arima.sim(model = list("ar" = 0.5), n = 10)
+adcf(x)
 ```
-

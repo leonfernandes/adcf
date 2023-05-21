@@ -17,7 +17,7 @@ get_weight_measure(mu = c("szekely", "gaussian"), index = 1, sigma2 = 0.25)
 
 \item{index}{Numeric between 0 and 2.}
 
-\item{sigma2}{Variance of guassian measure.}
+\item{sigma2}{Variance of gaussian measure.}
 
 \item{mu}{Single character string of weight measure to be used.
 Returns function which Fourier transform according to a given weight measure}

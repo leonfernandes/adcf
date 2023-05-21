@@ -3,7 +3,7 @@
 \name{adcf}
 \alias{adcf}
 \title{Calculates the auto-distance covariance of \code{x}. The weight measure for the
-distance covriance is specified via the Fourier transform function \code{mu_hat}.}
+distance covariance is specified via the Fourier transform function \code{mu_hat}.}
 \usage{
 adcf(x, lag = NULL, mu = c("szekely", "gaussian"), ...)
 }
@@ -23,7 +23,7 @@ An object of class \code{adcf_tbl}.
 }
 \description{
 Calculates the auto-distance covariance of \code{x}. The weight measure for the
-distance covriance is specified via the Fourier transform function \code{mu_hat}.
+distance covariance is specified via the Fourier transform function \code{mu_hat}.
 }
 \examples{
 # adcf ----------------------------------------------------------------------
