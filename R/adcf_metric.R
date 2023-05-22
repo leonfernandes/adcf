@@ -1,7 +1,8 @@
-#' Measures independence of observations based on auto distance covariance
+#' Auto distance covariance metric
 #'
+#' @inheritParams yardstick::pr_curve
 #' @param truth The column identifier for the true results (that is `numeric`).
-#' @param estimate The column identifier for the predicted resutls (that is also
+#' @param estimate The column identifier for the predicted results (that is also
 #' `numeric`)
 #' @param lag Vector of positive integers. This corresponds to the lag at
 #' which distance covariance should be evaluated.
@@ -32,7 +33,7 @@ adcf_metric.data.frame <- function(
         case_weights = !!rlang::enquo(case_weights),
         fn_options = list(lag = lag)
     )
-    yardstick:::curve_finalize(result, data, "adcf_df", "grouped_adcf_df")
+    curve_finalize(result, data, "adcf_df", "grouped_adcf_df")
 }
 
 #' @rdname adcf_metric

@@ -4,7 +4,7 @@
 \alias{adcf_metric}
 \alias{adcf_metric.data.frame}
 \alias{adcf_metric_vec}
-\title{Measures independence of observations based on auto distance covariance}
+\title{Auto distance covariance metric}
 \usage{
 adcf_metric(data, ...)
 
@@ -27,12 +27,29 @@ adcf_metric_vec(
 )
 }
 \arguments{
+\item{data}{A \code{data.frame} containing the columns specified by \code{truth} and
+\code{...}.}
+
+\item{...}{A set of unquoted column names or one or more
+\code{dplyr} selector functions to choose which variables contain the
+class probabilities. If \code{truth} is binary, only 1 column should be selected,
+and it should correspond to the value of \code{event_level}. Otherwise, there
+should be as many columns as factor levels of \code{truth} and the ordering of
+the columns should be the same as the factor levels of \code{truth}.}
+
 \item{truth}{The column identifier for the true results (that is \code{numeric}).}
 
 \item{lag}{Vector of positive integers. This corresponds to the lag at
 which distance covariance should be evaluated.}
 
-\item{estimate}{The column identifier for the predicted resutls (that is also
+\item{na_rm}{A \code{logical} value indicating whether \code{NA}
+values should be stripped before the computation proceeds.}
+
+\item{case_weights}{The optional column identifier for case weights.
+This should be an unquoted column name that evaluates to a numeric column
+in \code{data}. For \verb{_vec()} functions, a numeric vector.}
+
+\item{estimate}{The column identifier for the predicted results (that is also
 \code{numeric})}
 }
 \value{
@@ -40,5 +57,5 @@ A \code{tibble} with columns \code{.metric}, \code{.estimator} and \code{.estima
 1 row of values. For \code{adcf_metric_vec}, a single \code{numeric} value (or \code{NA}).
 }
 \description{
-Measures independence of observations based on auto distance covariance
+Auto distance covariance metric
 }
