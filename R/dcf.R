@@ -40,7 +40,7 @@ dcf <- function(
     dcov_vec <- purrr::map_dbl(
         lag,
         function(h) {
-            if (h > ny || h < 0) {
+            if (h >= ny || h < 0) {
                 warning(
                     "Some lag(s) are not positive or are too large. NA's
                     produced."
