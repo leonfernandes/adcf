@@ -1,13 +1,6 @@
-#' Auto distance covariance metric
+#' Auto distance correlation metric
 #'
-#' @inheritParams yardstick::pr_curve
-#' @param truth The column identifier for the true results (that is `numeric`).
-#' @param estimate The column identifier for the predicted results (that is also
-#' `numeric`)
-#' @param lag Vector of positive integers. This corresponds to the lag at
-#' which distance covariance should be evaluated.
-#' @returns A `tibble` with columns `.metric`, `.estimator` and `.estimate` and
-#' 1 row of values. For `adcf_metric_vec`, a single `numeric` value (or `NA`).
+#' @inheritParams adcv_metric
 #' @export
 adcf_metric <- function(data, ...) {
   UseMethod("adcf_metric")
@@ -19,7 +12,7 @@ adcf_metric.data.frame <- function(
     data,
     truth,
     ...,
-    lag = 1:vctrs::vec_size(data) - 1,
+    lag = 2:vctrs::vec_size(data) - 1,
     na_rm = TRUE,
     case_weights = NULL
 ) {
@@ -58,6 +51,10 @@ adcf_metric_vec <- function(
 }
 
 adcf_metric_impl <- function(truth, estimate, lag, case_weights = NULL) {
-    z <- estimate - truth
-    adcf(z, lag)
+    res <- adcv_metric_impl(truth, estimate, unique(c(0, lag)), case_weights)
+    lag0 <- res$dcov[1L]
+    res |>
+        dplyr::filter(lag > 0) |>
+        dplyr::mutate(dcor = dcov / lag0) |>
+        dplyr::select(-dcov)
 }
