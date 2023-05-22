@@ -1,6 +1,6 @@
 Package: adcf
 Title: Auto distance covariance/correlation
-Version: 0.0.2.9000
+Version: 0.0.3
 Authors@R: 
     person(
         "Leon", "Fernandes", , "leon.fernandes@columbia.com",
@@ -16,6 +16,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     dcov (>= 0.1.1),
+    dplyr (>= 1.1.0),
     purrr (>= 1.0.1),
     Rcpp (>= 1.0.10),
     RcppArmadillo (>= 0.12.2.0.0),
