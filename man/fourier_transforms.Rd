@@ -4,7 +4,7 @@
 \alias{mu_hat_szekely}
 \alias{mu_hat_gaussian}
 \alias{get_weight_measure}
-\title{Fourier transforms from pairwise distance matrix.}
+\title{Fourier transforms from pairwise distance matrix}
 \usage{
 mu_hat_szekely(x, index = 1)
 
@@ -19,16 +19,8 @@ get_weight_measure(mu = c("szekely", "gaussian"), index = 1, sigma2 = 0.25)
 
 \item{sigma2}{Variance of gaussian measure.}
 
-\item{mu}{Single character string of weight measure to be used.
-Returns function which Fourier transform according to a given weight measure}
-}
-\value{
-numeric matrix of Fourier transformed version of \code{x} according to
-distance covariance weight measure of \cite{Szekelyetal2007}.
-
-numeric matrix of Fourier transformed version of \code{x} according to
-Gaussian weight measure.
+\item{mu}{Single character string of weight measure to be used.}
 }
 \description{
-Fourier transforms from pairwise distance matrix.
+\code{get_weight_measure} returns either \code{mu_hat_gaussian} or \code{mu_hat_szekely}.
 }
