@@ -1,3 +1,3 @@
-# adcf 0.0.0.9000
+# adcf 0.0.3
 
-* Added a `NEWS.md` file to track changes to the package.
+Added custom metric functions.
