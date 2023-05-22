@@ -2,8 +2,7 @@
 % Please edit documentation in R/adcf.R
 \name{adcf}
 \alias{adcf}
-\title{Calculates the auto-distance covariance of \code{x}. The weight measure for the
-distance covariance is specified via the Fourier transform function \code{mu_hat}.}
+\title{Auto distance covariance}
 \usage{
 adcf(x, lag = NULL, mu = c("szekely", "gaussian"), ...)
 }
@@ -20,6 +19,8 @@ used. Must be one of "szekely" or "gaussian".}
 }
 \value{
 An object of class \code{adcf_tbl}.
+
+numeric matrix of Fourier transformation of \code{x}.
 }
 \description{
 Calculates the auto-distance covariance of \code{x}. The weight measure for the

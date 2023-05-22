@@ -1,3 +1,5 @@
+#' Auto distance covariance
+#'
 #' Calculates the auto-distance covariance of `x`. The weight measure for the
 #' distance covariance is specified via the Fourier transform function `mu_hat`.
 #'
@@ -9,6 +11,8 @@
 #' @param ... Optional parameters supplied for the weight measure `mu`.
 #' @export
 #' @returns An object of class `adcf_tbl`.
+
+#' @returns numeric matrix of Fourier transformation of `x`.
 #' @examples
 #' # adcf ----------------------------------------------------------------------
 #' x <- rnorm(100)
