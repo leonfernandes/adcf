@@ -15,3 +15,7 @@
 * Added custom adcf metric.
 * Helper function to convert from adcv to adcf.
 * Renamed columns of `acf_tbl`, `adcf_tbl` and `adcv_tbl`.
+
+# adcf 0.0.5.9001
+
+* added separate adcf and adcv functions.

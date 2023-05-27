@@ -2,9 +2,12 @@
 % Please edit documentation in R/adcf.R
 \name{adcf}
 \alias{adcf}
+\alias{adcv}
 \title{Auto distance covariance}
 \usage{
 adcf(x, lag = NULL, mu = c("szekely", "gaussian"), ...)
+
+adcv(x, lag = NULL, mu = c("szekely", "gaussian"), ...)
 }
 \arguments{
 \item{x}{numeric vector.}
@@ -19,12 +22,9 @@ used. Must be one of "szekely" or "gaussian".}
 }
 \value{
 An object of class \code{adcf_tbl}.
-
-numeric matrix of Fourier transformation of \code{x}.
 }
 \description{
-Calculates the auto-distance covariance of \code{x}. The weight measure for the
-distance covariance is specified via the Fourier transform function \code{mu_hat}.
+Calculates the auto-distance covariance/correlation of \code{x}.
 }
 \examples{
 # adcf ----------------------------------------------------------------------
