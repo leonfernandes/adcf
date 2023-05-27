@@ -28,6 +28,8 @@ adcf <- function(
     if (is.null(lag)) {
         lag <- 1:vctrs::vec_size(x) - 1
     }
-    value <- dcf(x, x, lag, mu, ...)
+    value <-
+        dcf(x, x, lag, mu, ...) |>
+        dplyr::rename(adcv = dcov)
     tibble::new_tibble(value, class = "adcf_tbl")
 }
