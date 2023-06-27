@@ -1,3 +1,3 @@
-# adcf 0.0.5.9002
+# adcf 0.0.6
 
-current development version
+* Basic release.
