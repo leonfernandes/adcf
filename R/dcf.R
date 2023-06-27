@@ -12,47 +12,48 @@
 #' @useDynLib adcf
 #' @export
 #' @returns A tibble of lagged distance covariances.
-dcf <- function(
-    x, y, lag = c(0L, 1L), mu = c("szekely", "gaussian"), ...
-) {
-    mu <- match.arg(mu)
-    # Determine if dcov::dcov can be used
-    use_szekely_fast <- (
-        mu == "szekely" &&
-            (is.null(list(...)[["index"]]) || list(...)[["index"]] == 1)
-    )
-    # Define dcov_calc using either dcov::dcov or adcf implementation
-    if (use_szekely_fast) {
-        dcov_calc <- function(xx, yy) {
-            dcov::dcov(xx, yy)
-        }
-    } else {
-        mu_hat <- get_weight_measure(mu, ...)
-        dcov_calc <- function(xx, yy) {
-            xxx <- pairwise_dist(xx, mu_hat)
-            yyy <- pairwise_dist(yy, mu_hat)
-            dist_to_dcov(xxx, yyy)
-        }
-    }
-    # Calculate distance covariances for each lag
-    nx <- vctrs::vec_size(x)
-    ny <- vctrs::vec_size(y)
-    dcov_vec <- purrr::map_dbl(
-        lag,
-        function(h) {
-            if (h >= ny || h < 0) {
-                warning(
-                    "Some lag(s) are not positive or are too large. NA's
-                    produced."
-                )
-                return(NA_real_)
+dcf <-
+    function(
+        x, y, lag = c(0L, 1L), mu = c("szekely", "gaussian"), ...
+    ) {
+        mu <- match.arg(mu)
+        # Determine if dcov::dcov can be used
+        use_szekely_fast <- (
+            mu == "szekely" &&
+                (is.null(list(...)[["index"]]) || list(...)[["index"]] == 1)
+        )
+        # Define dcov_calc using either dcov::dcov or adcf implementation
+        if (use_szekely_fast) {
+            dcov_calc <- function(xx, yy) {
+                dcov::dcov(xx, yy)
             }
-            h_max <- min(ny - h, nx)
-            dcov_calc(
-                vctrs::vec_slice(x, 1:h_max),
-                vctrs::vec_slice(y, 1:h_max + h)
-            )
+        } else {
+            mu_hat <- get_weight_measure(mu, ...)
+            dcov_calc <- function(xx, yy) {
+                xxx <- pairwise_dist(xx, mu_hat)
+                yyy <- pairwise_dist(yy, mu_hat)
+                dist_to_dcov(xxx, yyy)
+            }
         }
-    )
-    tibble::tibble(lag = lag, dcov = dcov_vec)
-}
+        # Calculate distance covariances for each lag
+        nx <- vctrs::vec_size(x)
+        ny <- vctrs::vec_size(y)
+        dcov_vec <- purrr::map_dbl(
+            lag,
+            function(h) {
+                if (h >= ny || h < 0) {
+                    warning(
+                        "Some lag(s) are not positive or are too large. NA's
+                        produced."
+                    )
+                    return(NA_real_)
+                }
+                h_max <- min(ny - h, nx)
+                dcov_calc(
+                    vctrs::vec_slice(x, 1:h_max),
+                    vctrs::vec_slice(y, 1:h_max + h)
+                )
+            }
+        )
+        tibble::tibble(lag = lag, dcov = dcov_vec)
+    }

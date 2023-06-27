@@ -5,27 +5,30 @@
 #' @param x Matrix of pairwise distances.
 #' @param index Numeric between 0 and 2.
 #' @rdname fourier_transforms
-mu_hat_szekely <- function(x, index = 1) {
-    if (index == 1) return(x)
-    x^index
-}
+mu_hat_szekely <-
+    function(x, index = 1) {
+        if (index == 1) return(x)
+        x^index
+    }
 #'
 #' @rdname fourier_transforms
 #' @param sigma2 Variance of gaussian measure.
-mu_hat_gaussian <- function(x, sigma2 = 0.25) {
-    exp(-x^2 * sigma2 / 2)
-}
+mu_hat_gaussian <-
+    function(x, sigma2 = 0.25) {
+        exp(-x^2 * sigma2 / 2)
+    }
 
 #' @rdname fourier_transforms
 #' @param mu Single character string of weight measure to be used.
-get_weight_measure <- function(
-    mu = c("szekely", "gaussian"), index = 1, sigma2 = 0.25
-) {
-    switch(mu,
-        "szekely" = function(x) mu_hat_szekely(x, index),
-        "gaussian" = function(x) mu_hat_gaussian(x, sigma2)
-    )
-}
+get_weight_measure <-
+    function(
+        mu = c("szekely", "gaussian"), index = 1, sigma2 = 0.25
+    ) {
+        switch(mu,
+            "szekely" = function(x) mu_hat_szekely(x, index),
+            "gaussian" = function(x) mu_hat_gaussian(x, sigma2)
+        )
+    }
 
 #' Fast pairwise Euclidean distances
 #'
@@ -35,7 +38,10 @@ get_weight_measure <- function(
 #' @param mu_hat Fourier transform function wrt some weight measure.
 #' @useDynLib adcf
 #' @returns A `length(x) * length(x)` matrix of pairwise Euclidean distances.
-pairwise_dist <- function(x, mu_hat) {
-    ret <- vapply(x, function(xdot) abs(x - xdot), double(vctrs::vec_size(x)))
-    mu_hat(ret)
-}
+pairwise_dist <-
+    function(x, mu_hat) {
+        ret <- vapply(
+            x, function(xdot) abs(x - xdot), double(vctrs::vec_size(x))
+        )
+        mu_hat(ret)
+    }

@@ -1,6 +1,6 @@
 Package: adcf
 Title: Auto distance covariance/correlation
-Version: 0.0.5.9001
+Version: 0.0.5.9002
 Authors@R: 
     person(
         "Leon", "Fernandes", , "leon.fernandes@columbia.com",

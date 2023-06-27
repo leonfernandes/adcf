@@ -21,17 +21,17 @@
 #' adcf(y)
 adcf <-
     function(x, lag = NULL, mu = c("szekely", "gaussian"), ...) {
-    if (is.null(lag)) {
-        lag <- 1:vctrs::vec_size(x) - 1
+        if (is.null(lag)) {
+            lag <- 1:vctrs::vec_size(x) - 1
+        }
+        if (!(0 %in% lag)) {
+            lag <- c(0, lag)
+        }
+        ret <- adcv(x, lag, mu, ...) |>
+            adcv_to_adcf() |>
+            as.list()
+        tibble::new_tibble(ret, class = "adcf_tbl")
     }
-    if (!(0 %in% lag)) {
-        lag <- c(0, lag)
-    }
-    ret <- adcv(x, lag, mu, ...) |>
-        adcv_to_adcf() |>
-        as.list()
-    tibble::new_tibble(ret, class = "adcf_tbl")
-}
 
 #' @rdname adcf
 #' @export

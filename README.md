@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 ## Introduction
@@ -14,7 +16,7 @@ You can install the development version of adcf like so:
 
 ``` r
 # Install development version from github
-devtools::install_github("leonfernandes/adcf")
+pak::pkg_install("leonfernandes/adcf")
 ```
 
 ## Example
