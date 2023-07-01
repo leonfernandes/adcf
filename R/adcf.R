@@ -26,7 +26,7 @@ adcf <-
             lags <- 1:vctrs::vec_size(x) - 1
         }
         my_lags <- lags
-        if (!(0 %in% lags)) {
+        if (lags[1] != 0) {
             # add zero to lags parameter
             my_lags <- c(0, lags)
         }
