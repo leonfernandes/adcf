@@ -4,14 +4,14 @@
 \alias{dcf}
 \title{Calculate pairwise distance covariances}
 \usage{
-dcf(x, y, lag = c(0L, 1L), mu = c("szekely", "gaussian"), ...)
+dcf(x, y, lags = 0:1, mu = c("szekely", "gaussian"), ...)
 }
 \arguments{
 \item{x}{numeric vector.}
 
 \item{y}{numeric vector.}
 
-\item{lag}{integer. Lag to be applied to \code{y}.}
+\item{lags}{integer. Lags to be applied to \code{y}.}
 
 \item{mu}{Single character string corresponding to the weight measure to be
 used. Must be one of "szekely" or "gaussian".}
@@ -23,5 +23,5 @@ A tibble of lagged distance covariances.
 }
 \description{
 Flexible version of distance covariance which uses the maximum number of
-observations from \code{x} and \code{y} for each lag.
+observations from \code{x} and \code{y} for each lags.
 }

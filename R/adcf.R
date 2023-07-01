@@ -3,13 +3,14 @@
 #' Calculates the auto-distance covariance/correlation of `x`.
 #'
 #' @param x numeric vector.
-#' @param lag integer. Specifies lag(s) at which distance covariance is to be
+#' @param lags integer. Specifies lags at which distance covariance is to be
 #'      calculated. When `NULL` maximum range of lags are used.
 #' @param mu Single character string corresponding to the weight measure to be
 #'      used. Must be one of "szekely" or "gaussian".
 #' @param ... Optional parameters supplied for the weight measure `mu`.
 #' @export
-#' @returns An object of class `adcf_tbl`.
+#' @returns A `tibble` with columns `lag`, `auto_dist_covariance` and
+#'      `auto_dist_correlation`.
 #' @examples
 #' # adcf ----------------------------------------------------------------------
 #' x <- rnorm(100)
@@ -20,28 +21,27 @@
 #' # Adcf values are larger for initial lags.
 #' adcf(y)
 adcf <-
-    function(x, lag = NULL, mu = c("szekely", "gaussian"), ...) {
-        if (is.null(lag)) {
-            lag <- 1:vctrs::vec_size(x) - 1
+    function(x, lags = NULL, mu = c("szekely", "gaussian"), ...) {
+        if (is.null(lags)) {
+            lags <- 1:vctrs::vec_size(x) - 1
         }
-        if (!(0 %in% lag)) {
-            lag <- c(0, lag)
+        my_lags <- lags
+        if (!(0 %in% lags)) {
+            # add zero to lags parameter
+            my_lags <- c(0, lags)
         }
-        ret <- adcv(x, lag, mu, ...) |>
-            adcv_to_adcf() |>
-            as.list()
-        tibble::new_tibble(ret, class = "adcf_tbl")
-    }
-
-#' @rdname adcf
-#' @export
-adcv <-
-    function(x, lag = NULL, mu = c("szekely", "gaussian"), ...) {
-        if (is.null(lag)) {
-            lag <- 2:vctrs::vec_size(x) - 1
-        }
-        value <-
-            dcf(x, x, lag, mu, ...) |>
-            dplyr::rename(adcv = dcov)
-        tibble::new_tibble(value, class = "adcv_tbl")
+        adcv_raw <-
+            # compute auto-distance covariances
+            dcf(x, x, my_lags, mu, ...) |>
+            dplyr::pull("dcov")
+        adcf_raw <-
+            # convert to auto-distance correlations
+            adcv_raw / adcv_raw[1]
+        tibble::tibble(
+            lag = my_lags,
+            auto_dist_covariance = adcv_raw,
+            auto_dist_correlation = adcf_raw
+        ) |>
+            # return required lags
+            dplyr::filter(lag %in% lags)
     }

@@ -2,17 +2,14 @@
 % Please edit documentation in R/adcf.R
 \name{adcf}
 \alias{adcf}
-\alias{adcv}
 \title{Auto distance covariance}
 \usage{
-adcf(x, lag = NULL, mu = c("szekely", "gaussian"), ...)
-
-adcv(x, lag = NULL, mu = c("szekely", "gaussian"), ...)
+adcf(x, lags = NULL, mu = c("szekely", "gaussian"), ...)
 }
 \arguments{
 \item{x}{numeric vector.}
 
-\item{lag}{integer. Specifies lag(s) at which distance covariance is to be
+\item{lags}{integer. Specifies lags at which distance covariance is to be
 calculated. When \code{NULL} maximum range of lags are used.}
 
 \item{mu}{Single character string corresponding to the weight measure to be
@@ -21,7 +18,8 @@ used. Must be one of "szekely" or "gaussian".}
 \item{...}{Optional parameters supplied for the weight measure \code{mu}.}
 }
 \value{
-An object of class \code{adcf_tbl}.
+A \code{tibble} with columns \code{lag}, \code{auto_dist_covariance} and
+\code{auto_dist_correlation}.
 }
 \description{
 Calculates the auto-distance covariance/correlation of \code{x}.

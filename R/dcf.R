@@ -1,11 +1,11 @@
 #' Calculate pairwise distance covariances
 #'
 #' Flexible version of distance covariance which uses the maximum number of
-#' observations from `x` and `y` for each lag.
+#' observations from `x` and `y` for each lags.
 #'
 #' @param x numeric vector.
 #' @param y numeric vector.
-#' @param lag integer. Lag to be applied to `y`.
+#' @param lags integer. Lags to be applied to `y`.
 #' @param mu Single character string corresponding to the weight measure to be
 #'      used. Must be one of "szekely" or "gaussian".
 #' @param ... Optional parameters supplied for the weight measure `mu`.
@@ -14,7 +14,7 @@
 #' @returns A tibble of lagged distance covariances.
 dcf <-
     function(
-        x, y, lag = c(0L, 1L), mu = c("szekely", "gaussian"), ...
+        x, y, lags = 0:1, mu = c("szekely", "gaussian"), ...
     ) {
         mu <- match.arg(mu)
         # Determine if dcov::dcov can be used
@@ -35,15 +35,15 @@ dcf <-
                 dist_to_dcov(xxx, yyy)
             }
         }
-        # Calculate distance covariances for each lag
+        # Calculate distance covariances for each lags
         nx <- vctrs::vec_size(x)
         ny <- vctrs::vec_size(y)
         dcov_vec <- purrr::map_dbl(
-            lag,
+            lags,
             function(h) {
                 if (h >= ny || h < 0) {
                     warning(
-                        "Some lag(s) are not positive or are too large. NA's
+                        "Some lags(s) are not positive or are too large. NA's
                         produced."
                     )
                     return(NA_real_)
@@ -55,5 +55,5 @@ dcf <-
                 )
             }
         )
-        tibble::tibble(lag = lag, dcov = dcov_vec)
+        tibble::tibble(lag = lags, dcov = dcov_vec)
     }
