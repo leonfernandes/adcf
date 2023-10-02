@@ -587,12 +587,12 @@ code .in { color: #008080; }
 </style>
 <style>
 body {
-box-sizing: border-box;
-min-width: 200px;
-max-width: 980px;
-margin: 0 auto;
-padding: 45px;
-padding-top: 0px;
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
 }
 </style>
 
@@ -608,19 +608,30 @@ padding-top: 0px;
 <!-- badges: end -->
 
 <h2 id="introduction">Introduction</h2>
-<p>The goal of adcf is to calculate auto-distance covariance for
-univariate time series data.</p>
+<p>The goal of adcf is to calculate auto-distance covariance for univariate time series data.</p>
 <h2 id="installation">Installation</h2>
 <p>You can install the development version of adcf like so:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Install development version from github</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;leonfernandes/adcf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Install development version from github</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">pak<span class="op">::</span><span class="kw">pkg_install</span>(<span class="st">&quot;leonfernandes/adcf&quot;</span>)</a></code></pre></div>
 <h2 id="example">Example</h2>
-<p>This is a basic example which shows you how to calculate auto
-distance covariance.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(adcf)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co"># Simulate a univariate autoregressive time series</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="st">&quot;ar&quot;</span> <span class="ot">=</span> <span class="fl">0.5</span>), <span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">adcf</span>(x)</span></code></pre></div>
+<p>This is a basic example which shows you how to calculate auto distance covariance.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(adcf)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># Simulate a univariate autoregressive time series</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">x &lt;-<span class="st"> </span>stats<span class="op">::</span><span class="kw">arima.sim</span>(<span class="dt">model =</span> <span class="kw">list</span>(<span class="st">&quot;ar&quot;</span> =<span class="st"> </span><span class="fl">0.5</span>), <span class="dt">n =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">adcf</span>(x)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; # A tibble: 10 × 3</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;      lag auto_dist_covariance auto_dist_correlation</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt;    &lt;dbl&gt;                &lt;dbl&gt;                 &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;  1     0               0.240                  1    </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;  2     1               0.0684                 0.285</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;  3     2               0.0819                 0.341</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  4     3               0.0701                 0.292</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  5     4               0.108                  0.448</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  6     5               0.190                  0.792</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  7     6               0.201                  0.837</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt;  8     7               0.170                  0.707</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  9     8               0.0941                 0.392</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt; 10     9               0                      0</span></a></code></pre></div>
 
 </body>
 </html>

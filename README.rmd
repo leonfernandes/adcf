@@ -31,7 +31,7 @@ pak::pkg_install("leonfernandes/adcf")
 
 This is a basic example which shows you how to calculate auto distance covariance.
 
-``` r
+```{r demo}
 library(adcf)
 # Simulate a univariate autoregressive time series
 x <- stats::arima.sim(model = list("ar" = 0.5), n = 10)
